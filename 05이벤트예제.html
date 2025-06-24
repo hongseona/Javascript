@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>박스 이동하기</title>
+    <style>
+    html,body { padding: 0px; margin: 0px;}
+    div.nav > button {
+        width: 60px;  height: 60px;
+    }
+    div.nav {
+      height: 100px;
+      background-color: aqua;
+      display: flex; justify-content: center; align-items: center;
+    }
+    div#box {
+      width: 150px;
+      height: 150px;
+      background-color: cadetblue;
+    }
+    div.main {
+      background-color: antiquewhite;
+      /* 남은 영역을 '높이' 로 설정하는 계산 : css 함수 calc() 
+         브라우저의 전체 높이 - nav 영역 높이 100px (계산식은 - 기호 양쪽에 공백 필수)
+      */
+      height: calc(100vh - 100px);
+      /* 자식 요소를 수직,수평 방향 모두 중앙 배치 */
+      display: flex; justify-content: center; align-items: center;
+    }
+     /* box 요소의 좌표(위치) 변경하기 위함. */
+    div#box { position: absolute;}
+    </style>
+</head>
+<body>
+    <!-- 가장 바깥쪽 박스 -->
+    <div id="container"> 
+        <!-- 첫번째 윗줄 박스 -->
+         <div class="nav">
+            <button id="top">👆</button><button id="right">👉</button>
+            <button id="down">👇</button><button id="left">👈</button>
+         </div>
+        <!-- 두번째 중앙 박스-->
+         <div class="main">
+            <!-- 컨트롤 하고 싶은 박스 -->
+             <div id="box"></div>
+         </div>        
+    </div>
+    <script>
+        const container = document.getElementById('container')
+        const box = document.getElementById('box')
+
+         document.body.addEventListener('keydown', e => {
+            console.log('이벤트정보',e)
+            const currentLeft=box.offsetLeft   //현재 box의 위치
+            const currentTop=box.offsetTop
+            switch(e.key){   //눌려진 키보드 키를 검사
+                case 'ArrowUp':
+                  console.log('방향 위를 눌렀습니다.')
+                  if(currentTop-10 > 100) { 
+                    box.style.top = (currentTop - 10) + 'px'
+                  }
+                  break;
+                case 'ArrowRight':
+                  console.log('방향 오른쪽을 눌렀습니다.')
+                  box.style.left = (currentLeft + 10) + 'px'
+                  break;
+                case 'ArrowDown':
+                  console.log('방향 아래를 눌렀습니다.')
+                     box.style.top = (currentTop + 10) + 'px'
+                  break;
+                case 'ArrowLeft':
+                  console.log('방향 왼쪽을 눌렀습니다.')
+                  if(currentLeft - 10 > 0){
+                    box.style.left = (currentLeft - 10) + 'px'
+                  }
+                  break;
+              }
+         })
+
+        container.addEventListener('click',
+            function (event){
+                if(event.target.tagName === 'BUTTON') {
+                    console.log(event.target.id)
+                    // 이벤트를 발생시킨 요소(target)의 id 속성값
+                    // 현재 박스의 너비,높이 크기를 저장하기
+                    const currentWidth = box.offsetWidth
+                    const currentHeight = box.offsetHeight
+                    // 크기는 10px만큼 변경하기
+
+                    if(event.target.id==='top') {    // 중첩 if (다른 if에 포함됨)
+                      console.log('박스가 작아집니다.(높이)')
+                      box.style.height = (currentHeight -10) + 'px'
+                    }else if(event.target.id==='down'){
+                      //앞의 조건 event.target.id==='top' 거짓일 때, 다른 조건을 다시 검사
+                      console.log('박스가 커집니다.(높이)')
+                      box.style.height = (currentHeight +10) + 'px'
+                    }else if(event.target.id==='left'){
+                      console.log('박스가 작아집니다.(너비)')
+                      box.style.width = (currentWidth -10) + 'px'
+                    }else if(event.target.id==='right'){
+                      console.log('박스가 커집니다.(너비)')
+                      box.style.width = (currentWidth -10) + 'px'
+
+                    }
+                }
+            })
+            /*
+                [자바스크립트에서 박스 요소 다루기]
+                -> 크기(너비 width, 높이 height), 좌표(left, top)
+                * 값을 가져올 때는 - offsetXXXX
+                * 값을 설정할 때는 - box.style.XXXX = '100px'
+                */
+    </script>
+    
+</body>
+</html>
