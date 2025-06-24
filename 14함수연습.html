@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>함수연습-계산기</title>
+    <script defer src="./JS/14ex.js"></script>
+    <style>
+        input,
+        select, span, button {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3>간단한 계산기</h3>
+    <div>
+        <input id="num1" placeholder="첫번째 값 입력하세요." type="number">
+        <select id="op">
+            <option value="+">＋</option>
+            <option value="-">－</option>
+            <option value="*">×</option>
+            <option value="/">÷</option>
+        </select>
+        <input id="num1" placeholder="두번째 값 입력하세요." type="number">
+        <span> = </span>
+        <button type="exeBtn">실행</button>
+    </div>    
+    <div style="margin-top: 20px;">
+        결과 : <span id="result">?</span>
+
+    </div>
+</body>
+</html>
