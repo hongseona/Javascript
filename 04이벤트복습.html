@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>이벤트 복습</title>
+</head>
+<body>
+    <h4>06.23</h4>
+    <button id="naverBtn">https://www.naver.com</button>
+    <button id="googleBtn">https://www.google.com</button>
+    <button id="githubBtn">https://www.github.com</button>
+    <button id="daumBtn">https://www.daum.com</button>
+    <hr>
+    <h3>이벤트 전파 예제</h3>
+    <p>자식요소가 많고 각각 하는 작업 기능이 같을 때-입력값은 다름</p>
+    <p>부모 요소에 이벤트 리스너를 등록하여 자식 이벤트를 처리-자식 이벤트가 생기면
+        부모 요소로 전파 되므로 가능합니다.
+    </p>
+    <div id="parent" style="background-color: antiquewhite; padding: 20px;">
+        <button id="https://www.naver.com">네이버</button>
+        <button id="https://www.google.com">구글</button>
+        <button id="https://www.github.com">깃헙</button>
+        <button id="https://www.daum.com">다음</button>
+    </div>
+
+    <script>
+        "use strick"
+        // 변수 선언을 강제. (이것 없으면 let, const 없이 변수 사용 가능함. )
+        // 이벤트 전파 예시 - parent 에 이벤트 리스너 등록하기
+
+        const parent = document.getElementById('parent')
+        parent.addEventListener('click', (event) => {
+            console.log("이벤트 타입:", event.type);
+            console.log("클릭한 위치:", event.clientX, event.clientY);
+            console.log("클릭한 요소 이름:", event.target.tagName);
+            if(event.target.tagName === 'BUTTON')
+            window.open(event.target.id,'_blank') 
+        })
+
+        const naverBtn = document.getElementById('naverBtn')
+        // 화살표 함수 : funtion 키워드 생략하는 형식
+        naverBtn.addEventListener('click', ()=>{
+            window.open(naverBtn.textContent,'_blank')
+        })
+
+        // const googleBtn = document.getElementById('googleBtn')
+        // 생략 가능 -> 많이 사용하는 키워드는 중복과 충돌 발생 ->직접 선언(권고사항)
+         googleBtn.addEventListener('click',() => {
+      window.open(googleBtn.textContent, '_blank')
+    })
+
+    githubBtn.addEventListener('click',() => {
+      window.open(githubBtn.textContent, '_blank')
+    })
+
+    daumBtn.addEventListener('click',() => {
+      window.open(daumBtn.textContent, '_blank')
+    })
+
+</script>
+    
+</body>
+</html>
