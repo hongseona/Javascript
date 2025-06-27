@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>내가 만든 타이머</title>
+       <style>
+           .modal {
+                display: none;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.7);
+                /* 네번째 같은 투명도 70 설정 */
+            }
+            .modal-content {
+                background-color: white;
+                margin: 20% auto;
+                padding: 40px;
+                width: 300px;
+                text-align: center;
+                border-radius: 8px;
+            }
+       </style>
+</head>
+
+<body>
+    <h4 id="now"></h4>
+    <hr>
+    <h2>타이머 설정</h2>
+    <div>
+        <label for="second">초: </label>
+        <input type="number" id="second" value="0">
+        <button id="startBtn">타이머 시작</button>
+        <button id="stopBtn">타이머 중지</button>
+    </div>
+    <div id="countdown"></div>
+    <script>
+        let timerInterval       // 타이머 설정 인터벌 할당
+
+        const now = document.getElementById('now')
+        now.textContent = new Date()
+        // 현재 시간 출력하기
+        window.setInterval(function () {
+            now.textContent = new Date()
+        }, 1000)
+
+        const startBtn = document.getElementById('startBtn')
+        const stopBtn = document.getElementById('stopBtn')
+
+        function btnToggle(isOff){          //false / true
+            // 버튼의 비활성화 속성 disabled 설정하기
+            startBtn.disabled = isOff    //false / true
+            stopBtn.disabled = !isOff    //true / false
+        }
+        btnToggle(false)    // 시작 활성화, 중지 비활성화
+
+        stopBtn.addEventListener('click', function(){
+            window.clearInterval(timerInterval)
+            btnToggle(false)
+        })
+
+        startBtn.addEventListener('click', function () {
+            let timeSeconds = Number(document.getElementById('second').value)
+
+            if (timeSeconds <= 0) {
+                alert('0보다 큰 시간을 설정하세요.')
+                return;     //함수종료
+            }
+
+            btnToggle(true)     // 사작 비활성화, 중지 활성화
+
+            updatecount(timeSeconds)
+            timerInterval = window.setInterval(function () {
+                timeSeconds = timeSeconds - 1
+                if (timeSeconds < 0) {
+                    alert('타임아웃')
+                    window.clearInterval(timerInterval)
+                    btnToggle(false)
+                }   else{
+                    updatecount(timeSeconds)
+                }
+             }, 1000)
+            })      // 시작 버튼 끝
+
+                function updatecount(timeSeconds) {
+                    document.getElementById('countdown').textContent
+                        // = timeSeconds 를 2자리 문자열로 출력하기
+                        = `남은 시간 : ⏰00:${timeSeconds.toString().padStart(2, '0')}`
+                }
+
+
+    </script>
+
+
+</body>
+
+</html>
