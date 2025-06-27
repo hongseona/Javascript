@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>콜백(callback) 함수</h3>
+    <p>함수(메소드) 의 입력값(인자)으로 다른 함수가 사용될 떄, 인자 함수를
+        콜백함수 라고 합니다. 콜백함수는 간단한 표현, 즉 화살표 함수 형식을
+        많이 사용합니다.</p>
+
+    <ul>
+        <li>addEventListener('이벤트이름', 콜백함수)</li>
+        <li>배열.forEach(콜백함수) - 배열요소를 하나씩 가져다가 콜백함수</li>
+        <li>배열.sort(콜백함수) - 배열요소를 2개씩 가져다가 값을 비교하는 콜백함수</li>
+        <li>window.setTimeout(콜백함수,ms시간) - 정해진 시간 지나고 1번만 콜백함수 실행</li>
+        <li>window.setInterval(콜백함수,ms시간) - 정해진 시간 간격으로 반복 실행</li>
+    </ul>
+    <p>개발자가 정의하는 함수의 인자를 콜백함수로 만들 수도 있습니다.</p>
+    <div id="test"></div>
+    <script>
+        function hello(message){
+            document.getElementById('test').textContent=message
+        }
+
+        function precessInput(cbf){     // cbf 변수는 함수로 실행할 예정
+            const message = prompt('메세지를 입력하세요.')
+            cbf(message)     // cbf 함수에게 message 입력으로 전달
+        }
+        // processInput  함수는 실행되는 내용을 함수로 전달 받아서 실행 시점에서 기능을 정합니다.
+        precessInput(hello)
+        precessInput(function (message) {
+            alert(message)
+        })
+    </script>
+
+</body>
+
+</html>
