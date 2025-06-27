@@ -3,32 +3,52 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>객체 배열 시간표</title>
     <style>
         table {
-            border: 1px solid tomato;
-            border-collapse: collapse;
-            
+            width: 400px;
         }
+
         th {
             color: white;
-            width: 100px;
             background-color: tomato;
             /* text-align: center; */
         }
-        td{
+
+        th,
+        td {
             text-align: center;
             border: 1px solid tomato;
+            width: 200px;
+            padding: 7px 12px;
+        }
+
+        h3,
+        button,
+        input {
+            padding: 7px 12px;
         }
     </style>
+    <script src="./js/20ex.js"></script>
+
 </head>
 
 <body>
     <!-- 참고. 19번 html 없음 -->
     <div id="root">
+        <h3>오늘 시간표</h3>
+    </div>
+    <hr>
+    <div>
+        <label for="newTime">시간: </label>
+        <input type="time" id="newTime">
+        <label for="newTodo">할일: </label>
+        <input type="text" id="newTodo">
+        <button id="newBtn">새로운 스케줄</button>
 
     </div>
-    <script src="./js/20ex.js"></script>
+
+    </div>
 </body>
 
 </html>
